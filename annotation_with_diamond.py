@@ -25,7 +25,7 @@ THREADS = 24
 EVALUE = "1e-20"
 MAX_TARGET_SEQS = 1
 SENSITIVITY = "--sensitive"  # o "--ultra-sensitive"
-OUTFMT = "6 std stitle"      # columnas estándar + título del sujeto
+OUTFMT = 6      # columnas estándar + título del sujeto
 
 # =========================
 # NO TOCAR DE AQUÍ ABAJO :)
