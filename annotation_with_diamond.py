@@ -12,8 +12,7 @@ Uso:
 import subprocess
 from pathlib import Path
 
-# =========================
-# CONFIG (edita aquí)
+
 # =========================
 TSV = "/data/users/sgarjua/ann_diamond_test/species.tsv"   # Formato: especie<TAB>ruta_fasta
 DB1 = "/data/shared_dbs/swissprot/uniprot_sprot_r2025_01.dmnd"
@@ -21,14 +20,13 @@ DB2 = "/data/shared_dbs/swissprot/uniprot_trembl_r2025_01.dmnd"
 OUTDIR = "/data/users/sgarjua/ann_diamond_test/"
 
 MODE = "blastp"            # "blastp" para proteomas; "blastx" para ADN
-THREADS = 24
+THREADS = "24"
 EVALUE = "1e-20"
-MAX_TARGET_SEQS = 1
+MAX_TARGET_SEQS = "1"
 SENSITIVITY = "--sensitive"  # o "--ultra-sensitive"
-OUTFMT = 6      # columnas estándar + título del sujeto
+OUTFMT = "6"      # columnas estándar + título del sujeto
 
-# =========================
-# NO TOCAR DE AQUÍ ABAJO :)
+
 # =========================
 
 def run_diamond(species: str, fasta: str, db: str, outdir: Path):
