@@ -163,7 +163,7 @@ def main():
             with open(fasta, "r") as infile, open(f"{f.stem}.nodots.faa", "w") as outfile:
                 for line in infile:
                     line = line.replace(".", "")
-                        outfile.write(line)
+                    outfile.write(line)
                 fasta = outfile
 
             # Ejecuta contra las dos bases
