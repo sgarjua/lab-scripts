@@ -29,7 +29,7 @@ MAX_TARGET_SEQS = "1"
 SENSITIVITY = "--sensitive"  # o "--ultra-sensitive"
 OUTFMT = "6"      # columnas estándar + título del sujeto
 
-# Post-proceso: mapper GO + AHRD (HAY QUE CONFIGURARLO BIEN TODAVÍA !!!!!!!!)
+# Post-proceso: mapper GO + AHRD
 UNIPROT_GO_MAPPER = "/data/users/sgarjua/ann_diamond_test/uniprot_GO_mapper.py"
 
 AHRD_JAR = "/data/software/AHRD/dist/ahrd.jar"
@@ -90,7 +90,7 @@ token_score_bit_score_weight: 0.468
 token_score_database_score_weight: 0.2098
 token_score_overlap_score_weight: 0.3221
 gene_ontology_result: {go_gaf}
-reference_go_regex: '^UniProtKB\\t(?<shortAccession>[^\\t]+)\\t[^\\t]+\\t(?!NOT\\|)[^\\t]*\\t(?<goTerm>GO:\\\\d{{7}})'
+reference_go_regex: '^UniProtKB\\t(?<shortAccession>[^\\t]+)\\t[^\\t]+\\t(?!NOT\\|)[^\\t]*\\t(?<goTerm>GO:\\d+)'
 prefer_reference_with_go_annos: true
 output: {out_file}
 blast_dbs:
