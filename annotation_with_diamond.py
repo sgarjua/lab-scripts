@@ -160,7 +160,7 @@ def main():
                 continue
 
             # Eliminar los puntos de los archivos de proteinas
-            with open(fasta, "r") as infile, open(f"{fasta.stem}.nodots.faa", "w") as outfile:
+            with open(fasta, "r") as infile, open(f"{Path(fasta).stem}.nodots.faa", "w") as outfile:
                 for line in infile:
                     line = line.replace(".", "")
                     outfile.write(line)
