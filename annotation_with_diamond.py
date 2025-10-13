@@ -160,11 +160,12 @@ def main():
                 continue
 
             # Eliminar los puntos de los archivos de proteinas
-            with open(fasta, "r") as infile, open(f"{Path(fasta).stem}.nodots.faa", "w") as outfile:
-                for line in infile:
-                    line = line.replace(".", "")
-                    outfile.write(line)
-                fasta = outfile
+            # MODIFICAR PARA QUE LO GUARDE EN OTRA CARPETA O HACER UNA FUNCIOOOOOON
+            # with open(fasta, "r") as infile, open(f"{Path(fasta).stem}.nodots.faa", "w") as outfile:
+            #     for line in infile:
+            #         line = line.replace(".", "")
+            #         outfile.write(line)
+            #     fasta = outfile
 
             # Ejecuta contra las dos bases
             run_diamond(species, fasta, DB1, outdir)
