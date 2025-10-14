@@ -182,34 +182,37 @@ def main():
             else:
                 # YAML temporal AHRD + ejecución
                 ahrd_out = outdir / f"{species}.proteins.funct_ahrd.tsv"
-                with NamedTemporaryFile("w", delete=False, suffix=".yml", dir=str(outdir)) as tmp:
-                    yaml_path = Path(tmp.name)
+                if ahrd_out.exists():
+                    print("[INFO] AHRD already exists → {ahrd_out}")
+                else:    
+                    with NamedTemporaryFile("w", delete=False, suffix=".yml", dir=str(outdir)) as tmp:
+                        yaml_path = Path(tmp.name)
 
-                print("[INFO] Generando YAML temporal para AHRD…")
-                write_ahrd_yaml(
-                    tmp_yaml_path=yaml_path,
-                    proteins_fasta=Path(fasta),  # usa el FASTA que ya estabas usando
-                    go_gaf=Path(GO_GAF),
-                    out_file=ahrd_out,
-                    sprot_tsv=sprot_tsv,
-                    trembl_tsv=trembl_tsv,
-                    uniprot_sprot_fa=Path(UNIPROT_SPROT),
-                    uniprot_trembl_fa=Path(UNIPROT_TREMBL),
-                    blacklist=Path(BLACKLIST),
-                    filter_sprot=Path(FILTER_SPROT),
-                    filter_trembl=Path(FILTER_TREMBL),
-                    token_blacklist=Path(TOKEN_BLACKLIST),
-                )
+                    print("[INFO] Generando YAML temporal para AHRD…")
+                    write_ahrd_yaml(
+                        tmp_yaml_path=yaml_path,
+                        proteins_fasta=Path(fasta),  # usa el FASTA que ya estabas usando
+                        go_gaf=Path(GO_GAF),
+                        out_file=ahrd_out,
+                        sprot_tsv=sprot_tsv,
+                        trembl_tsv=trembl_tsv,
+                        uniprot_sprot_fa=Path(UNIPROT_SPROT),
+                        uniprot_trembl_fa=Path(UNIPROT_TREMBL),
+                        blacklist=Path(BLACKLIST),
+                        filter_sprot=Path(FILTER_SPROT),
+                        filter_trembl=Path(FILTER_TREMBL),
+                        token_blacklist=Path(TOKEN_BLACKLIST),
+                    )
 
-                print("[INFO] Ejecutando AHRD…")
-                run_ahrd(Path(AHRD_JAR), yaml_path, xmx=JAVA_XMX)
-                print(f"[DONE] AHRD → {ahrd_out}")
+                    print("[INFO] Ejecutando AHRD…")
+                    run_ahrd(Path(AHRD_JAR), yaml_path, xmx=JAVA_XMX)
+                    print(f"[DONE] AHRD → {ahrd_out}")
 
-                # Limpieza del YAML temporal (opcional)
-                try:
-                    yaml_path.unlink(missing_ok=True)
-                except Exception:
-                    pass
+                    # Limpieza del YAML temporal (opcional)
+                    try:
+                        yaml_path.unlink(missing_ok=True)
+                    except Exception:
+                        pass
 
 
     print("\nTodo terminado. ✔")
