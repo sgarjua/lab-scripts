@@ -46,7 +46,7 @@ def main():
                 print(f"[WARN] Línea ignorada (formato esperado: especie<TAB>fasta): {line}")
                 continue
 
-            spieces, fasta = parts[0].strip(), parts[1].strip()
+            species, fasta = parts[0].strip(), parts[1].strip()
 
             if not species or not fasta:
                 print(f"[WARN] Falta especie o fasta en la línea: {line}")
@@ -57,8 +57,8 @@ def main():
                 continue
 
             # creamos el prefijo
-            n1 = spieces.split("_")[0][0,1]
-            n2 = spieces.split("_")[1][0,1,2]
+            n1 = species.split("_")[0][0,1]
+            n2 = species.split("_")[1][0,1,2]
             prefix = n1 + n2
             
             # se limpia el fasta
