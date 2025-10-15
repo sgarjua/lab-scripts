@@ -60,6 +60,7 @@ def main():
             n1 = species.split("_")[0][0,1]
             n2 = species.split("_")[1][0,1,2]
             prefix = n1 + n2
+            print(prefix)
             
             # se limpia el fasta
 
