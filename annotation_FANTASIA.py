@@ -15,12 +15,12 @@ import csv, sys
 
 # configuración ===============================================================
 TSV = "/data/users/sgarjua/ann_diamond_test/species.tsv" # archivo con: nombre especie(=nombre carpeta) + ruta al fasta
-OUTDIR = "/data/users/sgarjua/SofiaFantasia/" # carpeta con las carpetas de las especies con los fastas
+OUTDIR = Path("/data/users/sgarjua/SofiaFantasia/") # carpeta con las carpetas de las especies con los fastas
 
 
 # funciones ===================================================================
 # limpiar el fasta
-def fasta_cleaner(fasta: str, species: str, clean_fasta: str):
+def fasta_cleaner(fasta: Path, species: str, clean_fasta: str):
     out = OUTDIR / species / clean_fasta
     cmd = f"sed -r 's/ .+//' {fasta} > {out}"
     print(cmd)
