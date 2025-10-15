@@ -59,6 +59,9 @@ def main():
             # creamos el prefijo
             parts = species.split("_")
             prefix = parts[0][:2] + parts[1][:3]
+            print(len(parts))
+                if len(parts) > 2:
+                    prefix += parts[2][:3]
             print(prefix)
             
             # se limpia el fasta
