@@ -95,7 +95,7 @@ def main():
             
             # se limpia el fasta
             clean_fasta_name = f"{Path(fasta).stem}.clean.faa"
-            clean_fasta = OUTDIR / species / clean_fasta
+            clean_fasta = OUTDIR / species / clean_fasta_name
             fasta_cleaner(fasta, species, clean_fasta)
 
             # se crea la carpeta run_fantasia dentro de la carpeta de la especie
