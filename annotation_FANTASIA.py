@@ -99,21 +99,21 @@ def main():
             fasta_cleaner(fasta, clean_fasta)
 
             # se crea la carpeta run_fantasia dentro de la carpeta de la especie
-            run_fantasia = OUTDIR / species / run_fantasia
+            run_fantasia = OUTDIR / species / "run_fantasia"
             # if not run_fantasia.exists():
             #     out.mkdir(parents=True, exist_ok=True)
             #     print("[INFO] Carpeta 'run_fantasia' creada correctamente")
 
             # nos movemos a esa carpeta
-            original = Path.cwd()
-            os.chdir(run_fantasia)
+            #original = Path.cwd()
+            #os.chdir(run_fantasia)
 
             # ejecución del primer comando
 
             # ejecución del segundo comando
 
 
-            os.chdir(original)
+            #os.chdir(original)
 
     print("\nTodo terminado. ✔")
 
