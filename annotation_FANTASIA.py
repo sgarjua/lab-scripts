@@ -19,6 +19,11 @@ OUTDIR = "/data/users/sgarjua/SofiaFantasia/" # carpeta con las carpetas de las 
 
 
 # funciones ===================================================================
+# limpiar el fasta
+def fasta_cleaner(fasta: str, clean_fasta: str)
+    cmd = f"sed -r 's/ .+//' {fasta} > {clean_fasta}"
+    print(cmd)
+    
 # crear carpeta
 
 # ejecutar primer comando
@@ -59,12 +64,12 @@ def main():
             # creamos el prefijo
             parts = species.split("_")
             prefix = parts[0][:2] + parts[1][:3]
-            print(len(parts))
             if len(parts) > 2:
                 prefix += parts[2][:3]
-            print(prefix)
             
             # se limpia el fasta
+            clean_fasta = f"{Path(fasta).stem}.clean.faa"
+            fasta_cleaner(fasta, clean_fasta)
 
             # se crea la carpeta run_fantasia dentro de la carpeta de la especie
 
