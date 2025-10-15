@@ -33,13 +33,14 @@ def fasta_cleaner(fasta: Path, clean_fasta: Path):
 # ejecutar primer comando
 def firt_step(clean_fasta: Path, prefix: str, fantasia_run: Path):
 
-     cmd = [ GENERATE_GPSM,
+    cmd = [ GENERATE_GPSM,
             "--infile", clean_fasta, 
             "--outpath", fantasia_run, 
             "--prott5",
             "--prefix", prefix,
             "--mode GPU"
-            ]
+    ]
+
     print(cmd)
 
 # ejecutar segundo comando
@@ -52,7 +53,8 @@ def second_step(prefix: str, fantasia_run: Path):
             "-x", prefix, 
             "-m prott5",
             "-o", fantasia_run
-            ]
+    ]
+
     print(cmd)
 
 # main ========================================================================
