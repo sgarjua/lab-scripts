@@ -20,10 +20,10 @@ OUTDIR = "/data/users/sgarjua/SofiaFantasia/" # carpeta con las carpetas de las 
 
 # funciones ===================================================================
 # limpiar el fasta
-def fasta_cleaner(fasta: str, clean_fasta: str)
+def fasta_cleaner(fasta: str, clean_fasta: str):
     cmd = f"sed -r 's/ .+//' {fasta} > {clean_fasta}"
     print(cmd)
-    
+
 # crear carpeta
 
 # ejecutar primer comando
