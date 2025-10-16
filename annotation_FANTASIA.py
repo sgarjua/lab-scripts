@@ -32,7 +32,7 @@ def fasta_cleaner(fasta: Path, clean_fasta: Path):
     else:
         print(f"[RUN] Se va a limpiar el fasta")
         try:
-            subprocess.run(cmd, check=True)
+            subprocess.run(cmd, shell=True, check=True)
             print(f"[DONE] Limpieza del fasta completada")
         except subprocess.CalledProcessError as e:
             print(f"[FAIL] Revisa parámetros/rutas. Detalle: {e}")
@@ -118,7 +118,9 @@ def main():
             prefix = parts[0][:2] + parts[1][:3]
             if len(parts) > 2:
                 prefix += parts[2][:3]
-            
+
+            print(f"EJECUTANDO FANTASIA PARA LA ESPECIE {species}")
+
             # se limpia el fasta
             clean_fasta_name = f"{Path(fasta).stem}.clean.faa"
             clean_fasta = OUTDIR / species / clean_fasta_name
@@ -133,8 +135,6 @@ def main():
             # nos movemos a esa carpeta
             original = Path.cwd()
             os.chdir(fantasia_run)
-
-            print(f"EJECUTANDO FANTASIA PARA LA ESPECIE {species}")
 
             # ejecución del primer comando
             firt_step(fasta, prefix, fantasia_run)
