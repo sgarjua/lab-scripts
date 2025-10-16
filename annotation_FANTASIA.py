@@ -60,7 +60,6 @@ def firt_step(species: str, clean_fasta: str, prefix: str, fantasia_run: str):
         except subprocess.CalledProcessError as e:
             print(f"[FAIL] Revisa parámetros/rutas. Detalle: {e}")
 
-
 # ejecutar segundo comando
 def second_step(prefix: str, fantasia_run: str):
     out_path = fantasia_run / f"{prefix}_prott5"
@@ -83,6 +82,7 @@ def second_step(prefix: str, fantasia_run: str):
             print(f"[DONE] Segundo paso completado; cmd={cmd}")
         except subprocess.CalledProcessError as e:
             print(f"[FAIL] Revisa parámetros/rutas. Detalle: {e}")
+
 
 # main ========================================================================
 def main():
@@ -141,7 +141,7 @@ def main():
             firt_step(species, clean_fasta, prefix, fantasia_run)
 
             # ejecución del segundo comando
-            #second_step(prefix, fantasia_run)
+            second_step(prefix, fantasia_run)
 
             os.chdir(original)
 
