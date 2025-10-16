@@ -38,7 +38,7 @@ def fasta_cleaner(fasta: Path, clean_fasta: Path):
             print(f"[FAIL] Revisa parámetros/rutas. Detalle: {e}")
 
 # ejecutar primer comando
-def firt_step(clean_fasta: str, prefix: str, fantasia_run: str):
+def firt_step(clean_fasta: Path, prefix: str, fantasia_run: Path):
     out_path = fantasia_run / "config_files"
 
     cmd = [ GENERATE_GPSM,
