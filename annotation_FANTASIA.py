@@ -32,8 +32,8 @@ def fasta_cleaner(fasta: Path, clean_fasta: Path):
     else:
         print(f"[RUN] Se va a limpiar el fasta")
         try:
-            subprocess.run(cmd, shell=True, check=True)
-            print(f"[DONE] Limpieza del fasta completada")
+            subprocess.run(cmd.join(), shell=True, check=True)
+            print(f"[DONE] Limpieza del fasta completada; cmd={cmd.join()}")
         except subprocess.CalledProcessError as e:
             print(f"[FAIL] Revisa parámetros/rutas. Detalle: {e}")
 
