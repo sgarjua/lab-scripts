@@ -137,7 +137,7 @@ def main():
             os.chdir(fantasia_run)
 
             # ejecución del primer comando
-            firt_step(fasta, prefix, fantasia_run)
+            firt_step(clean_fasta, prefix, fantasia_run)
 
             # ejecución del segundo comando
             #second_step(prefix, fantasia_run)
