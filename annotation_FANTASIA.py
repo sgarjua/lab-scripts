@@ -40,6 +40,7 @@ def fasta_cleaner(fasta: Path, clean_fasta: Path):
 # ejecutar primer comando
 def firt_step(clean_fasta: str, prefix: str, fantasia_run: str):
     out_path = fantasia_run / f"{clean_fasta.stem}_cdhit100.pep"
+    print(out_path)
 
     cmd = [ GENERATE_GPSM,
             "--infile", clean_fasta, 
