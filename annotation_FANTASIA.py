@@ -78,7 +78,7 @@ def second_step(prefix: str, fantasia_run: str):
     else:
         print(f"[RUN] Se va a ejecutar el segundo paso de FANTASIA")
         try:
-            subprocess.run(cmd, check=True)
+            subprocess.run(cmd, shell=True, check=True)
             print(f"[DONE] Segundo paso completado; cmd={cmd}")
         except subprocess.CalledProcessError as e:
             print(f"[FAIL] Revisa parámetros/rutas. Detalle: {e}")
