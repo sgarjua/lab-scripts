@@ -17,7 +17,8 @@ from tempfile import NamedTemporaryFile
 
 
 # ========================= CONFIGURACIÓN =====================================
-TSV = "/data/users/sgarjua/ann_diamond_test/species.tsv"   # Formato: especie<TAB>ruta_fasta
+#TSV = "/data/users/sgarjua/ann_diamond_test/species.tsv"   # Formato: especie<TAB>ruta_fasta
+TSV = "/data/users/sgarjua/ann_diamond_test/sorghum.tsv"
 DB1 = "/data/shared_dbs/swissprot/uniprot_sprot_r2025_01.dmnd"
 DB2 = "/data/shared_dbs/swissprot/uniprot_trembl_r2025_01.dmnd"
 OUTDIR = "/data/users/sgarjua/ann_diamond_test/"
