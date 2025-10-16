@@ -127,7 +127,7 @@ def main():
             # se crea la carpeta run_fantasia dentro de la carpeta de la especie
             run_fantasia = OUTDIR / species / "run_fantasia"
             if not run_fantasia.exists():
-                out.mkdir(parents=True, exist_ok=True)
+                run_fantasia.mkdir(parents=True, exist_ok=True)
                 print("[INFO] Carpeta 'run_fantasia' creada correctamente")
 
             # nos movemos a esa carpeta
