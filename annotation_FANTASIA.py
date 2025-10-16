@@ -56,7 +56,7 @@ def firt_step(species: str, clean_fasta: str, prefix: str, fantasia_run: str):
         print(f"[RUN] Se va a ejecutar el primer paso de FANTASIA")
         try:
             subprocess.run(cmd, check=True)
-            print(f"[DONE] Primer paso completado; ; cmd={cmd}")
+            print(f"[DONE] Primer paso completado; cmd={cmd}")
         except subprocess.CalledProcessError as e:
             print(f"[FAIL] Revisa parámetros/rutas. Detalle: {e}")
 
@@ -80,7 +80,7 @@ def second_step(prefix: str, fantasia_run: str):
         print(f"[RUN] Se va a ejecutar el segundo paso de FANTASIA")
         try:
             subprocess.run(cmd, check=True)
-            print(f"[DONE] Segundo paso completado")
+            print(f"[DONE] Segundo paso completado; cmd={cmd}")
         except subprocess.CalledProcessError as e:
             print(f"[FAIL] Revisa parámetros/rutas. Detalle: {e}")
 
