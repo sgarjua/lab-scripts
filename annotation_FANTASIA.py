@@ -54,7 +54,7 @@ def firt_step(clean_fasta: Path, prefix: str, fantasia_run: Path):
     else:
         print(f"[RUN] Se va a ejecutar el primer paso de FANTASIA")
         try:
-            subprocess.run(cmd, check=True)
+            subprocess.run(cmd, shell=True, check=True)
             print(f"[DONE] Primer paso completado")
         except subprocess.CalledProcessError as e:
             print(f"[FAIL] Revisa parámetros/rutas. Detalle: {e}")
