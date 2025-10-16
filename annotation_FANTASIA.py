@@ -38,8 +38,8 @@ def fasta_cleaner(fasta: Path, clean_fasta: Path):
             print(f"[FAIL] Revisa parámetros/rutas. Detalle: {e}")
 
 # ejecutar primer comando
-def firt_step(clean_fasta: str, prefix: str, fantasia_run: str):
-    out_path = fantasia_run / f"{clean_fasta.stem}_cdhit100.pep"
+def firt_step(species: str, clean_fasta: str, prefix: str, fantasia_run: str):
+    out_path = OUTDIR / species / f"{clean_fasta.stem}_cdhit100.pep"
     print(out_path)
 
     cmd = [ GENERATE_GPSM,
@@ -138,7 +138,7 @@ def main():
             os.chdir(fantasia_run)
 
             # ejecución del primer comando
-            firt_step(clean_fasta, prefix, fantasia_run)
+            firt_step(species, clean_fasta, prefix, fantasia_run)
 
             # ejecución del segundo comando
             #second_step(prefix, fantasia_run)
