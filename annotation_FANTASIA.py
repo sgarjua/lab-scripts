@@ -23,11 +23,11 @@ GPU = "CUDA_VISIBLE_DEVICES=1"
 
 # funciones ===================================================================
 # limpiar el fasta
-def fasta_cleaner(fasta: str, clean_fasta: str):
+def fasta_cleaner(fasta: Path, clean_fasta: Path):
 
     cmd = f"sed -r 's/ .+//' {fasta} > {clean_fasta}"
     
-    if Path(clean_fasta).exists():
+    if clean_fasta.exists():
         print(f"[ALREADY DONE] El archivo fasta ya estaba limpio")
     else:
         print(f"[RUN] Se va a limpiar el fasta")
@@ -124,23 +124,23 @@ def main():
             clean_fasta = OUTDIR / species / clean_fasta_name
             fasta_cleaner(fasta, clean_fasta)
 
-            # se crea la carpeta run_fantasia dentro de la carpeta de la especie
-            run_fantasia = OUTDIR / species / "run_fantasia"
-            if not run_fantasia.exists():
-                run_fantasia.mkdir(parents=True, exist_ok=True)
-                print("[INFO] Carpeta 'run_fantasia' creada correctamente")
+            # se crea la carpeta fantasia_run dentro de la carpeta de la especie
+            fantasia_run = OUTDIR / species / "fantasia_run"
+            if not fantasia_run.exists():
+                fantasia_run.mkdir(parents=True, exist_ok=True)
+                print("[INFO] Carpeta 'fantasia_run' creada correctamente")
 
             # nos movemos a esa carpeta
             original = Path.cwd()
-            os.chdir(run_fantasia)
+            os.chdir(fantasia_run)
 
             print(f"EJECUTANDO FANTASIA PARA LA ESPECIE {species}")
 
             # ejecución del primer comando
-            firt_step(fasta, prefix, run_fantasia)
+            firt_step(fasta, prefix, fantasia_run)
 
             # ejecución del segundo comando
-            #second_step(prefix, run_fantasia)
+            #second_step(prefix, fantasia_run)
 
             os.chdir(original)
 
