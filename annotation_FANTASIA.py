@@ -64,14 +64,7 @@ def firt_step(species: str, clean_fasta: str, prefix: str, fantasia_run: str):
 def second_step(prefix: str, fantasia_run: str):
     out_path = fantasia_run / f"{prefix}_prott5"
 
-    cmd = [ GPU,
-            F"screen -L -Logfile {prefix}.log",
-            LAUNCH_GPSM,
-            "-c", fantasia_run, 
-            "-x", prefix, 
-            "-m prott5",
-            "-o", fantasia_run
-    ]
+    cmd = F"{GPU} screen -L -Logfile {prefix}.log {LAUNCH_GPSM} -c {fantasia_run} -x {prefix} -m prott5 -o {fantasia_run}"
 
     if out_path.exists():
         print(f"[ALREADY DONE] El segundo paso para esta especie ya había sido realizado")
