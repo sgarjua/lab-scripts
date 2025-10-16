@@ -23,15 +23,23 @@ GPU = "CUDA_VISIBLE_DEVICES=1"
 
 # funciones ===================================================================
 # limpiar el fasta
-def fasta_cleaner(fasta: Path, clean_fasta: Path):
+def fasta_cleaner(fasta: str, clean_fasta: str):
 
     cmd = f"sed -r 's/ .+//' {fasta} > {clean_fasta}"
     
-    #EJECUTAAAAAR, pero comprobar primero si ya existe
-
+    if Path(clean_fasta).exists():
+        print(f"[ALREADY DONE] El archivo fasta ya estaba limpio")
+    else:
+        print(f"[RUN] Se va a limpiar el fasta")
+        try:
+            subprocess.run(cmd, check=True)
+            print(f"[DONE] Limpieza del fasta completada")
+        except subprocess.CalledProcessError as e:
+            print(f"[FAIL] Revisa parámetros/rutas. Detalle: {e}")
 
 # ejecutar primer comando
-def firt_step(clean_fasta: Path, prefix: str, fantasia_run: Path):
+def firt_step(clean_fasta: str, prefix: str, fantasia_run: str):
+    out_path = fantasia_run / "config_files"
 
     cmd = [ GENERATE_GPSM,
             "--infile", clean_fasta, 
@@ -41,10 +49,20 @@ def firt_step(clean_fasta: Path, prefix: str, fantasia_run: Path):
             "--mode GPU"
     ]
 
-    print(cmd)
+    if out_path.exists():
+        print(f"[ALREADY DONE] El primer paso para esta especie ya había sido realizado")
+    else:
+        print(f"[RUN] Se va a ejecutar el primer paso de FANTASIA")
+        try:
+            subprocess.run(cmd, check=True)
+            print(f"[DONE] Primer paso completado")
+        except subprocess.CalledProcessError as e:
+            print(f"[FAIL] Revisa parámetros/rutas. Detalle: {e}")
+
 
 # ejecutar segundo comando
-def second_step(prefix: str, fantasia_run: Path):
+def second_step(prefix: str, fantasia_run: str):
+    out_path = fantasia_run / f"{prefix}_prott5"
 
     cmd = [ GPU,
             F"screen -L -Logfile {prefix}.log",
@@ -55,7 +73,15 @@ def second_step(prefix: str, fantasia_run: Path):
             "-o", fantasia_run
     ]
 
-    print(cmd)
+    if out_path.exists():
+        print(f"[ALREADY DONE] El segundo paso para esta especie ya había sido realizado")
+    else:
+        print(f"[RUN] Se va a ejecutar el segundo paso de FANTASIA")
+        try:
+            subprocess.run(cmd, check=True)
+            print(f"[DONE] Segundo paso completado")
+        except subprocess.CalledProcessError as e:
+            print(f"[FAIL] Revisa parámetros/rutas. Detalle: {e}")
 
 # main ========================================================================
 def main():
@@ -100,13 +126,15 @@ def main():
 
             # se crea la carpeta run_fantasia dentro de la carpeta de la especie
             run_fantasia = OUTDIR / species / "run_fantasia"
-            # if not run_fantasia.exists():
-            #     out.mkdir(parents=True, exist_ok=True)
-            #     print("[INFO] Carpeta 'run_fantasia' creada correctamente")
+            if not run_fantasia.exists():
+                out.mkdir(parents=True, exist_ok=True)
+                print("[INFO] Carpeta 'run_fantasia' creada correctamente")
 
             # nos movemos a esa carpeta
-            #original = Path.cwd()
-            #os.chdir(run_fantasia)
+            original = Path.cwd()
+            os.chdir(run_fantasia)
+
+            print(f"EJECUTANDO FANTASIA PARA LA ESPECIE {species}")
 
             # ejecución del primer comando
             firt_step(fasta, prefix, run_fantasia)
@@ -114,7 +142,7 @@ def main():
             # ejecución del segundo comando
             second_step(prefix, run_fantasia)
 
-            #os.chdir(original)
+            os.chdir(original)
 
     print("\nTodo terminado. ✔")
 
