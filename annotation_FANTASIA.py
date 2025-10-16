@@ -32,8 +32,8 @@ def fasta_cleaner(fasta: Path, clean_fasta: Path):
     else:
         print(f"[RUN] Se va a limpiar el fasta")
         try:
-            subprocess.run(" ".join(cmd), shell=True, check=True)
-            print(f"[DONE] Limpieza del fasta completada; cmd={" ".join(cmd)}")
+            subprocess.run(cmd, shell=True, check=True)
+            print(f"[DONE] Limpieza del fasta completada")
         except subprocess.CalledProcessError as e:
             print(f"[FAIL] Revisa parámetros/rutas. Detalle: {e}")
 
@@ -54,8 +54,8 @@ def firt_step(clean_fasta: str, prefix: str, fantasia_run: str):
     else:
         print(f"[RUN] Se va a ejecutar el primer paso de FANTASIA")
         try:
-            subprocess.run(cmd, shell=True, check=True)
-            print(f"[DONE] Primer paso completado")
+            subprocess.run(" ".join(cmd), shell=True, check=True)
+            print(f"[DONE] Primer paso completado; ; cmd={" ".join(cmd)}")
         except subprocess.CalledProcessError as e:
             print(f"[FAIL] Revisa parámetros/rutas. Detalle: {e}")
 
