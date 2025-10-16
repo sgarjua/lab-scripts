@@ -32,13 +32,13 @@ def fasta_cleaner(fasta: Path, clean_fasta: Path):
     else:
         print(f"[RUN] Se va a limpiar el fasta")
         try:
-            subprocess.run(cmd.join(), shell=True, check=True)
-            print(f"[DONE] Limpieza del fasta completada; cmd={cmd.join()}")
+            subprocess.run(" ".join(cmd), shell=True, check=True)
+            print(f"[DONE] Limpieza del fasta completada; cmd={" ".join(cmd)}")
         except subprocess.CalledProcessError as e:
             print(f"[FAIL] Revisa parámetros/rutas. Detalle: {e}")
 
 # ejecutar primer comando
-def firt_step(clean_fasta: Path, prefix: str, fantasia_run: Path):
+def firt_step(clean_fasta: str, prefix: str, fantasia_run: str):
     out_path = fantasia_run / f"{clean_fasta.stem}_cdhit100.pep"
 
     cmd = [ GENERATE_GPSM,
