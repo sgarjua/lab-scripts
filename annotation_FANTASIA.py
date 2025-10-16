@@ -109,9 +109,10 @@ def main():
             #os.chdir(run_fantasia)
 
             # ejecución del primer comando
+            firt_step(fasta, prefix, fantasia_run)
 
             # ejecución del segundo comando
-
+            second_step(prefijo, fantasia_run)
 
             #os.chdir(original)
 
