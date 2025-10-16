@@ -140,7 +140,7 @@ def main():
             firt_step(fasta, prefix, run_fantasia)
 
             # ejecución del segundo comando
-            second_step(prefix, run_fantasia)
+            #second_step(prefix, run_fantasia)
 
             os.chdir(original)
 
