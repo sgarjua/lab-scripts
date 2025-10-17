@@ -63,8 +63,9 @@ def firt_step(species: str, clean_fasta: str, prefix: str, fantasia_run: str):
 # ejecutar segundo comando
 def second_step(prefix: str, fantasia_run: str):
     out_path = fantasia_run / f"{prefix}.log"
+    screen_name = f"fantasia_{prefix}"
 
-    cmd = F"{GPU} screen -L -Logfile {prefix}.log {LAUNCH_GPSM} -c {fantasia_run} -x {prefix} -m prott5 -o {fantasia_run}"
+    cmd = F"{GPU} screen -S {screen_name} -L -Logfile {prefix}.log {LAUNCH_GPSM} -c {fantasia_run} -x {prefix} -m prott5 -o {fantasia_run}"
 
     if out_path.exists():
         print(f"[ALREADY DONE] El segundo paso para esta especie ya había sido realizado")
@@ -72,9 +73,18 @@ def second_step(prefix: str, fantasia_run: str):
         print(f"[RUN] Se va a ejecutar el segundo paso de FANTASIA")
         try:
             subprocess.run(cmd, shell=True, check=True)
-            print(f"[DONE] Segundo paso completado; cmd={cmd}")
+            print(f"[WAIT] Esperando a que el screen '{screen_name}' termine...")
+            # Esperar a que el screen termine
+            while True:
+                result = subprocess.run(f"screen -ls | grep -q {screen_name}", shell=True)
+                if result.returncode != 0:
+                    print(f"[DONE] Segundo paso completado; cmd={cmd}; Log: {out_path}")
+                    break
+                time.sleep(10)
         except subprocess.CalledProcessError as e:
             print(f"[FAIL] Revisa parámetros/rutas. Detalle: {e}")
+
+
 
 
 # main ========================================================================
