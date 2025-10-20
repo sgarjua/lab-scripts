@@ -21,6 +21,7 @@ OUTDIR = Path("/data/users/sgarjua/SofiaFantasia/") # carpeta con las carpetas d
 GENERATE_GPSM = "/data/users/sgarjua/00_software/FANTASIA/generate_gopredsim_input_files.sh"
 LAUNCH_GPSM = "/data/users/sgarjua/00_software/FANTASIA/launch_gopredsim_pipeline.sh"
 GPU = "CUDA_VISIBLE_DEVICES=1"
+TOPGO = "/data/users/sgarjua/00_software/FANTASIA/convert_topgo_format.py"
 
 # funciones ===================================================================
 # limpiar el fasta
@@ -85,7 +86,22 @@ def second_step(prefix: str, fantasia_run: str):
         except subprocess.CalledProcessError as e:
             print(f"[FAIL] Revisa parámetros/rutas. Detalle: {e}")
 
+# ejecutar tercer comando
+def topgo_step(prefix: str, fantasia_run: str, fasta: str):
+    out_path = fantasia_run / f"{fasta.stem}.FANTASIA_TopGO.txt"
 
+    cmd = f"python3 {TOPGO} -a {prefix}_prott5 -o {out_path} -p {prefix}"
+
+
+    if out_path.exists():
+        print(f"[ALREADY DONE] El tercer paso (TopGo) para esta especie ya había sido realizado")
+    else:
+        print(f"[RUN] Se va a ejecutar el tercer paso (TopGo)")
+        try:
+            subprocess.run(cmd, shell=True, check=True)
+            print(f"[DONE] TopGo paso completado; cmd={cmd}")
+        except subprocess.CalledProcessError as e:
+            print(f"[FAIL] Revisa parámetros/rutas. Detalle: {e}")
 
 
 # main ========================================================================
@@ -145,7 +161,10 @@ def main():
             firt_step(species, clean_fasta, prefix, fantasia_run)
 
             # ejecución del segundo comando
-            second_step(prefix, fantasia_run)
+            #second_step(prefix, fantasia_run)
+
+            # ejecución del tercer comando
+            topgo_step(prefix, fantasia_run, fasta)
 
             os.chdir(original)
 
