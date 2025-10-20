@@ -161,7 +161,7 @@ def main():
             firt_step(species, clean_fasta, prefix, fantasia_run)
 
             # ejecución del segundo comando
-            #second_step(prefix, fantasia_run)
+            second_step(prefix, fantasia_run)
 
             # ejecución del tercer comando
             topgo_step(prefix, fantasia_run, fasta)
