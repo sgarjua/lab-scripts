@@ -87,8 +87,8 @@ def second_step(prefix: str, fantasia_run: str):
             print(f"[FAIL] Revisa parámetros/rutas. Detalle: {e}")
 
 # ejecutar tercer comando
-def topgo_step(prefix: str, fantasia_run: str, fasta: Path):
-    out_path = fantasia_run / f"{fasta.stem}.FANTASIA_TopGO.txt"
+def topgo_step(prefix: str, fantasia_run: str, fasta: str):
+    out_path = fantasia_run / f"{Path(fasta).stem}.FANTASIA_TopGO.txt"
 
     cmd = f"python3 {TOPGO} -a {prefix}_prott5 -o {out_path} -p {prefix}"
 
