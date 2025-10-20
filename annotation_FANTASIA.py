@@ -12,6 +12,7 @@ import subprocess
 from pathlib import Path
 import csv, sys
 import os
+import time
 
 
 # configuración ===============================================================
