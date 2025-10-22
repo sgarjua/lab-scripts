@@ -56,7 +56,7 @@ def main():
                 # para cada linea del archivo
                 for line in hom:
                     line = line.strip()
-                    parts = species.split("\t")
+                    parts = line.split("\t")
                     # tiene que saltarse la primera linea y la cabecera
                     if not line or line.startswith("#"):
                         continue
