@@ -13,7 +13,7 @@ calculos = {}
 
 # funciones ===================================================================
 
-def calc_stats(file: Path)
+def calc_stats(file: Path):
     # contadores
     id_sin_go = 0
     gos_totales = 0
