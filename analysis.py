@@ -51,6 +51,7 @@ def calc_stats(file: Path, species: str, protes: int):
     # hacer un diccionario con los calculos
     calculos[species] = [protes, gos_totales, id_con_go, id_sin_go, gos_por_gen]
     print(calculos)
+    return(protes)
 
 
 # main ========================================================================
