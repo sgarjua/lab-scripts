@@ -13,11 +13,10 @@ calculos = {}
 
 # funciones ===================================================================
 
-def calc_stats(file: Path, species: str):
+def calc_stats(file: Path, species: str, protes: int):
     # contadores
     id_sin_go = 0
     gos_totales = 0
-    protes = 0
 
     # para cada linea del archivo
     for line in file:
@@ -88,13 +87,13 @@ def main():
                 print(f"[WARN] RESULTADOS FANTASIA no existe o está vacío para {species}")
                 continue
 
+            protes = 0
             # abrimos los resultados de homología
             with homologia.open(encoding="utf-8") as hom:
-                calc_stats(hom, species)
-
+                calc_stats(hom, species, protes)
             # abrimos los resultados de fantasia
             with fantasia.open(encoding="utf-8") as fan:
-                calc_stats(fan, species)
+                calc_stats(fan, species, protes)
 
                 # calcular el solape
 
