@@ -34,7 +34,7 @@ def main():
                 print(f"[WARN] Línea ignorada (formato esperado: especie<TAB>ruta_homologia<TAB>ruta_fantasia): {line}")
                 continue
 
-            species, homologia, fantasia = parts[0].strip(), [1].strip()parts, [2].strip()parts
+            species, homologia, fantasia = parts[0].strip(), parts[1].strip(), parts[2].strip()
 
             if not species or not homologia or not fantasia:
                 print(f"[WARN] Falta especie o rutas en la línea: {line}")
