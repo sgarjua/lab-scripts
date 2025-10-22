@@ -9,7 +9,8 @@ import csv, sys
 TSV = "/data/users/sgarjua/fof_analisis_resultados.tsv"
 # creamos un diccionario {secuencia: [gos homologia],[gos fantasia]}
 resultados = {}
-calculos = {}
+calculos_h = {}
+calculos_f = {}
 
 # funciones ===================================================================
 
