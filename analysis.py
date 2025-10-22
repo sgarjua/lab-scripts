@@ -58,7 +58,7 @@ def main():
                     line = line.strip()
                     parts = species.split("\t")
                     # tiene que saltarse la primera linea y la cabecera
-                    if not line or line.startswith("#") or line.startswith("Protein-Accession"):
+                    if not line or line.startswith("#"):
                         continue
                     prot = parts[0]
                     # cogemos el id y la metemos en el diccionario si no estaba todavía
