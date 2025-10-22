@@ -63,7 +63,6 @@ def main():
                     prot = parts[0]
                     # cogemos el id y la metemos en el diccionario si no estaba todavía
                     resultados[prot] = []
-                    print(resultados)
                     # asociamos los términos go a la lista de [gos homologia que está asociado a ese id]
                 
                 # calculos pertinentes:
@@ -86,3 +85,8 @@ def main():
                 # calcular el solape
 
                 # hacer el diagrama de venn
+
+print(resultados)
+
+if __name__ == "__main__":
+    main()
