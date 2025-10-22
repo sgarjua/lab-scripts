@@ -60,7 +60,6 @@ def main():
                     # tiene que saltarse la primera linea y la cabecera
                     if not line or line.startswith("#"):
                         continue
-                    print(line)
                     prot = parts[0].strip()
                     print(prot)
                     # cogemos el id y la metemos en el diccionario si no estaba todavía
