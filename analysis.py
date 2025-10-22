@@ -13,10 +13,11 @@ calculos = {}
 
 # funciones ===================================================================
 
-def calc_stats(file: Path, species: str, protes: int):
+def calc_stats(file: Path, species: str):
     # contadores
     id_sin_go = 0
     gos_totales = 0
+    protes = 0
 
     # para cada linea del archivo
     for line in file:
@@ -26,10 +27,10 @@ def calc_stats(file: Path, species: str, protes: int):
         if not line or line.startswith("#") or line.startswith("Protein-Accession"):
             continue
         prot = parts[0].strip()
+        protes += 1
         # cogemos el id y la metemos en el diccionario si no estaba todavía
         if prot not in resultados:
             resultados[prot] = [[], []]      # [hom, fan]
-            protes += 1
         # asociamos los términos go a la lista de [gos homologia que están asociado a ese id]
         # En AHRD los GO están en la última columna, coma-separados
         gos_field = parts[-1].strip() if parts else ""
@@ -42,7 +43,6 @@ def calc_stats(file: Path, species: str, protes: int):
             id_sin_go += 1
 
     # calculos pertinentes:
-    print(protes, gos_totales)
     # gos totales
     # ids con al menos 1 go
     id_con_go = protes - id_sin_go
@@ -51,7 +51,6 @@ def calc_stats(file: Path, species: str, protes: int):
     # hacer un diccionario con los calculos
     calculos[species] = [protes, gos_totales, id_con_go, id_sin_go, gos_por_gen]
     print(calculos)
-    return(protes)
 
 
 # main ========================================================================
@@ -88,13 +87,13 @@ def main():
                 print(f"[WARN] RESULTADOS FANTASIA no existe o está vacío para {species}")
                 continue
 
-            protes = 0
             # abrimos los resultados de homología
             with homologia.open(encoding="utf-8") as hom:
-                calc_stats(hom, species, protes)
+                calc_stats(hom, species)
+
             # abrimos los resultados de fantasia
             with fantasia.open(encoding="utf-8") as fan:
-                calc_stats(fan, species, protes)
+                calc_stats(fan, species)
 
                 # calcular el solape
 
