@@ -58,10 +58,9 @@ def main():
                     line = line.strip()
                     parts = line.split("\t")
                     # tiene que saltarse la primera linea y la cabecera
-                    if not line or line.startswith("#"):
+                    if not line or line.startswith("#") or line.startswith("Protein-Accession"):
                         continue
                     prot = parts[0].strip()
-                    print(prot)
                     # cogemos el id y la metemos en el diccionario si no estaba todavía
                     # asociamos los términos go a la lista de [gos homologia que está asociado a ese id]
                     if prot not in resultados:
@@ -71,7 +70,6 @@ def main():
                     gos_field = parts[-1].strip() if parts else ""
                     if "GO:" in gos_field:
                         gos = [g.strip() for g in gos_field.split(",") if g.strip()]
-                        print(gos)
                         resultados[prot][0] = gos
 
                 # calculos pertinentes:
@@ -81,6 +79,29 @@ def main():
 
 
             # abrimos los resultados de fantasia
+            with fantasia.open(encoding="utf-8") as fan:
+                # contadores
+                id_sin_go = 0
+
+                # para cada linea del archivo
+                for line in fan:
+                    line = line.strip()
+                    parts = line.split("\t")
+                    # tiene que saltarse la primera linea y la cabecera
+                    if not line or line.startswith("#"):
+                        continue
+                    prot = parts[0].strip()
+                    # cogemos el id y la metemos en el diccionario si no estaba todavía
+                    # asociamos los términos go a la lista de [gos homologia que está asociado a ese id]
+                    if prot not in resultados:
+                        resultados[prot] = [[], []]      # [hom, fan]
+
+                    # En AHRD los GO están en la última columna, coma-separados
+                    gos_field = parts[-1].strip() if parts else ""
+                    if "GO:" in gos_field:
+                        gos = [g.strip() for g in gos_field.split(",") if g.strip()]
+                        resultados[prot][1] = gos
+
 
                 # para cada linea del archivo
                     # cogemos el id y la metemos en el diccionario si no estaba todavía
