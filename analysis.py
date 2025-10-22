@@ -95,7 +95,7 @@ def main():
 
                 # hacer el diagrama de venn
 
-print(resultados.keys())
+    print(resultados)
 
 if __name__ == "__main__":
     main()
