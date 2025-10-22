@@ -43,6 +43,7 @@ def calc_stats(file: Path, species: str):
             id_sin_go += 1
 
     # calculos pertinentes:
+    print(protes, gos_totales)
     # gos totales
     # ids con al menos 1 go
     id_con_go = protes - id_sin_go
