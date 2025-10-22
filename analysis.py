@@ -20,7 +20,7 @@ def calc_stats(file: Path):
     protes = 0
 
     # para cada linea del archivo
-    for line in hom:
+    for line in file:
         line = line.strip()
         parts = line.split("\t")
         # tiene que saltarse la primera linea y la cabecera
