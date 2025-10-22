@@ -13,6 +13,44 @@ calculos = {}
 
 # funciones ===================================================================
 
+def calc_stats(file: Path)
+    # contadores
+    id_sin_go = 0
+    gos_totales = 0
+    protes = 0
+
+    # para cada linea del archivo
+    for line in hom:
+        line = line.strip()
+        parts = line.split("\t")
+        # tiene que saltarse la primera linea y la cabecera
+        if not line or line.startswith("#") or line.startswith("Protein-Accession"):
+            continue
+        prot = parts[0].strip()
+        # cogemos el id y la metemos en el diccionario si no estaba todavía
+        if prot not in resultados:
+            resultados[prot] = [[], []]      # [hom, fan]
+            protes += 1
+        # asociamos los términos go a la lista de [gos homologia que están asociado a ese id]
+        # En AHRD los GO están en la última columna, coma-separados
+        gos_field = parts[-1].strip() if parts else ""
+        if "GO:" in gos_field:
+            gos = [g.strip() for g in gos_field.split(",") if g.strip()]
+            resultados[prot][0] = gos
+            for g in gos:
+                gos_totales += 1
+        else:
+            id_sin_go += 1
+
+    # calculos pertinentes:
+    # gos totales
+    # ids con al menos 1 go
+    id_con_go = protes - id_sin_go
+    # media de gos/gen
+    gos_por_gen = gos_totales / protes
+    # hacer un diccionario con los calculos
+    calculos[species] = [protes, gos_totales, id_con_go, id_sin_go, gos_por_gen]
+    print(calculos)
 
 
 # main ========================================================================
@@ -51,79 +89,15 @@ def main():
 
             # abrimos los resultados de homología
             with homologia.open(encoding="utf-8") as hom:
-                # contadores
-                id_sin_go = 0
-                gos_totales = 0
-                protes = 0
-
-                # para cada linea del archivo
-                for line in hom:
-                    line = line.strip()
-                    parts = line.split("\t")
-                    # tiene que saltarse la primera linea y la cabecera
-                    if not line or line.startswith("#") or line.startswith("Protein-Accession"):
-                        continue
-                    prot = parts[0].strip()
-                    # cogemos el id y la metemos en el diccionario si no estaba todavía
-                    if prot not in resultados:
-                        resultados[prot] = [[], []]      # [hom, fan]
-                        protes += 1
-                    # asociamos los términos go a la lista de [gos homologia que están asociado a ese id]
-                    # En AHRD los GO están en la última columna, coma-separados
-                    gos_field = parts[-1].strip() if parts else ""
-                    if "GO:" in gos_field:
-                        gos = [g.strip() for g in gos_field.split(",") if g.strip()]
-                        resultados[prot][0] = gos
-                        for g in gos:
-                            gos_totales += 1
-                    else:
-                        id_sin_go += 1
-
-                # calculos pertinentes:
-                # gos totales
-                # ids con al menos 1 go
-                id_con_go = protes - id_sin_go
-                # media de gos/gen
-                gos_por_gen = gos_totales / protes
-                # hacer un diccionario con los calculos
-                calculos[species] = [protes, gos_totales, id_con_go, id_sin_go, gos_por_gen]
-                print(calculos)
-
+            calc_stats(hom)
 
             # abrimos los resultados de fantasia
             with fantasia.open(encoding="utf-8") as fan:
-                # contadores
-                id_sin_go = 0
-
-                # para cada linea del archivo
-                for line in fan:
-                    line = line.strip()
-                    parts = line.split("\t")
-                    if not line or line.startswith("#"):
-                        continue
-                    prot = parts[0].strip()
-                    # cogemos el id y la metemos en el diccionario si no estaba todavía
-                    if prot not in resultados:
-                        resultados[prot] = [[], []]      # [hom, fan]
-                    # asociamos los términos go a la lista de [gos fantasia que están asociado a ese id]
-                    gos_field = parts[-1].strip() if parts else ""
-                    if "GO:" in gos_field:
-                        gos = [g.strip() for g in gos_field.split(",") if g.strip()]
-                        resultados[prot][1] = gos
-                    else:
-                        id_sin_go += 1
-
-
-                # calculos pertinentes:
-                # gos totales
-                # ids con al menos 1 go
-                # media de gos/gen
+            calc_stats(fan)
 
                 # calcular el solape
 
                 # hacer el diagrama de venn
-
-    print(resultados)
 
 if __name__ == "__main__":
     main()
