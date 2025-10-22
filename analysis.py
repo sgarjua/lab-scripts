@@ -69,10 +69,10 @@ def main():
 
                     # En AHRD los GO están en la última columna, coma-separados
                     gos_field = parts[-1].strip() if parts else ""
-                    if gos_field:
+                    if "GO:" in gos_field:
                         gos = [g.strip() for g in gos_field.split(",") if g.strip()]
                         print(gos)
-                        resultados[prot][0].extend(gos)
+                        resultados[prot][0] = gos
 
                 # calculos pertinentes:
                 # gos totales
