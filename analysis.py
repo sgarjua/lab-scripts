@@ -89,11 +89,11 @@ def main():
 
             # abrimos los resultados de homología
             with homologia.open(encoding="utf-8") as hom:
-            calc_stats(hom)
+                calc_stats(hom)
 
             # abrimos los resultados de fantasia
             with fantasia.open(encoding="utf-8") as fan:
-            calc_stats(fan)
+                calc_stats(fan)
 
                 # calcular el solape
 
