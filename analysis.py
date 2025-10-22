@@ -60,7 +60,9 @@ def main():
                     # tiene que saltarse la primera linea y la cabecera
                     if not line or line.startswith("#"):
                         continue
+                    print(line)
                     prot = parts[0].strip()
+                    print(prot)
                     # cogemos el id y la metemos en el diccionario si no estaba todavía
                     # asociamos los términos go a la lista de [gos homologia que está asociado a ese id]
                     if prot not in resultados:
@@ -68,6 +70,7 @@ def main():
 
                     # En AHRD los GO están en la última columna, coma-separados
                     gos_field = parts[-1].strip() if parts else ""
+                    print(gos_field)
                     if gos_field:
                         gos = [g.strip() for g in gos_field.split(",") if g.strip()]
                         resultados[prot][0].extend(gos)
