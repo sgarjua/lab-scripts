@@ -48,9 +48,8 @@ def calc_stats(file: Path, species: str):
     id_con_go = protes - id_sin_go
     # media de gos/gen
     gos_por_gen = gos_totales / protes
-    # hacer un diccionario con los calculos
-    calculos[species] = [protes, gos_totales, id_con_go, id_sin_go, gos_por_gen]
-    print(calculos)
+
+    return protes, gos_totales, id_con_go, id_sin_go, gos_por_gen
 
 
 # main ========================================================================
@@ -89,11 +88,15 @@ def main():
 
             # abrimos los resultados de homología
             with homologia.open(encoding="utf-8") as hom:
-                calc_stats(hom, species)
+                protes, gos_totales, id_con_go, id_sin_go, gos_por_gen = calc_stats(hom, species)
+                calculos_h[species] = [protes, gos_totales, id_con_go, id_sin_go, gos_por_gen]
+                print(calculos_h)
 
             # abrimos los resultados de fantasia
             with fantasia.open(encoding="utf-8") as fan:
-                calc_stats(fan, species)
+                protes, gos_totales, id_con_go, id_sin_go, gos_por_gen = calc_stats(fan, species)
+                calculos_f[species] = [protes, gos_totales, id_con_go, id_sin_go, gos_por_gen]
+                print(calculos_f)
 
                 # calcular el solape
 
