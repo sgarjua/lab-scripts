@@ -103,5 +103,6 @@ def main():
 
                 # hacer el diagrama de venn
 
+    print(resultados)
 if __name__ == "__main__":
     main()
