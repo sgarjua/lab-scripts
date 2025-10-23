@@ -101,7 +101,7 @@ def main():
         "Secuencias (H|F)",
         "Con GO (H|F)",
         "Sin GO (H|F)",
-        "Cobertura% (H|F)"
+        "Cobertura% (H|F)",
         "Media GO/sec (H|F)",
         "GOs totales (H|F)",
         "GOs solapados (total)"
