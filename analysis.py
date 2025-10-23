@@ -158,7 +158,7 @@ def main():
                 f"{protes_h} | {protes_f}",
                 f"{id_con_go_h} | {id_con_go_f}",
                 f"{id_sin_go_h} | {id_sin_go_f}",
-                f"{cobertura_h} | {cobertura_f}",
+                f"{cobertura_h:.3f} | {cobertura_f:.3f}",
                 f"{gos_por_prote_h:.3f} | {gos_por_prote_f:.3f}",
                 f"{gos_totales_h} | {gos_totales_f}",
                 total_solapados
