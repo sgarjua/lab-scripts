@@ -101,6 +101,7 @@ def main():
         "Con GO (H|F)",
         "Sin GO (H|F)",
         "Media GO/sec (H|F)",
+        "GOs totales (H|F)",
         "GOs solapados (total)"
     ]
     asegurar_cabecera(OUTFILE, cabecera)
@@ -155,6 +156,7 @@ def main():
                 f"{protes_h} | {protes_f}",
                 f"{id_con_go_h} | {id_con_go_f}",
                 f"{id_sin_go_h} | {id_sin_go_f}",
+                f"{gos_totales_h} | {gos_totales_f}",
                 f"{gos_por_gen_h:.3f} | {gos_por_gen_f:.3f}",
                 total_solapados
             ]
