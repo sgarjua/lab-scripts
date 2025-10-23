@@ -20,7 +20,7 @@ def calc_stats(file, species: str, destino: int):
     """
     Lee un archivo de resultados y guarda los GO en resultados[prot][destino],
     donde destino=0 -> Homología, destino=1 -> FANTASIA.
-    Devuelve: (protes, gos_totales, id_con_go, id_sin_go, gos_por_gen)
+    Devuelve: (protes, gos_totales, id_con_go, id_sin_go, gos_por_prote)
     """
     id_sin_go = 0
     gos_totales = 0
@@ -51,8 +51,9 @@ def calc_stats(file, species: str, destino: int):
             id_sin_go += 1
 
     id_con_go = protes - id_sin_go
-    gos_por_gen = (gos_totales / protes) if protes else 0.0
-    return protes, gos_totales, id_con_go, id_sin_go, gos_por_gen
+    gos_por_prote = (gos_totales / protes) if protes else 0.0
+    cobertura = (id_con_go / protes) * 100
+    return protes, gos_totales, id_con_go, id_sin_go, gos_por_prote, cobertura
 
 
 def calc_overlap_por_prote(resultados_dict):
@@ -100,6 +101,7 @@ def main():
         "Secuencias (H|F)",
         "Con GO (H|F)",
         "Sin GO (H|F)",
+        "Cobertura% (H|F)"
         "Media GO/sec (H|F)",
         "GOs totales (H|F)",
         "GOs solapados (total)"
@@ -139,13 +141,13 @@ def main():
 
             # homología
             with homologia.open(encoding="utf-8") as hom:
-                protes_h, gos_totales_h, id_con_go_h, id_sin_go_h, gos_por_gen_h = calc_stats(hom, species, destino=0)
-                calculos_h[species] = [protes_h, gos_totales_h, id_con_go_h, id_sin_go_h, gos_por_gen_h]
+                protes_h, gos_totales_h, id_con_go_h, id_sin_go_h, gos_por_prote_h, cobertura_h = calc_stats(hom, species, destino=0)
+                calculos_h[species] = [protes_h, gos_totales_h, id_con_go_h, id_sin_go_h, gos_por_prote_h, cobertura_h]
 
             # FANTASIA
             with fantasia.open(encoding="utf-8") as fan:
-                protes_f, gos_totales_f, id_con_go_f, id_sin_go_f, gos_por_gen_f = calc_stats(fan, species, destino=1)
-                calculos_f[species] = [protes_f, gos_totales_f, id_con_go_f, id_sin_go_f, gos_por_gen_f]
+                protes_f, gos_totales_f, id_con_go_f, id_sin_go_f, gos_por_prote_f, cobertura_f = calc_stats(fan, species, destino=1)
+                calculos_f[species] = [protes_f, gos_totales_f, id_con_go_f, id_sin_go_f, gos_por_prote_f, cobertura_f]
 
             # calcular el solape de GO por proteína
             overlaps, total_solapados = calc_overlap_por_prote(resultados)
@@ -156,8 +158,9 @@ def main():
                 f"{protes_h} | {protes_f}",
                 f"{id_con_go_h} | {id_con_go_f}",
                 f"{id_sin_go_h} | {id_sin_go_f}",
+                f"{cobertura_h} | {cobertura_f}",
+                f"{gos_por_prote_h:.3f} | {gos_por_prote_f:.3f}",
                 f"{gos_totales_h} | {gos_totales_f}",
-                f"{gos_por_gen_h:.3f} | {gos_por_gen_f:.3f}",
                 total_solapados
             ]
             append_fila(OUTFILE, fila)
