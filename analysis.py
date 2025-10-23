@@ -41,7 +41,6 @@ def calc_stats(file, species: str, destino: int):
         if prot not in resultados:
             resultados[prot] = [[], []]  # [hom, fan]
 
-        # En AHRD los GO suelen ir en la última columna, coma-separados
         gos_field = parts[-1].strip() if parts else ""
         if "GO:" in gos_field:
             gos = [g.strip() for g in gos_field.split(",") if g.strip()]
@@ -105,6 +104,7 @@ def main():
         "Media GO/sec (H|F)",
         "GOs totales (H|F)",
         "GOs solapados (total)"
+        "%"
     ]
     asegurar_cabecera(OUTFILE, cabecera)
 
@@ -161,7 +161,8 @@ def main():
                 f"{cobertura_h:.3f} | {cobertura_f:.3f}",
                 f"{gos_por_prote_h:.3f} | {gos_por_prote_f:.3f}",
                 f"{gos_totales_h} | {gos_totales_f}",
-                total_solapados
+                total_solapados,
+                f"{(total_solapados/gos_totales_h):.3f} | {(total_solapados/gos_totales_f):.3f}"
             ]
             append_fila(OUTFILE, fila)
 
