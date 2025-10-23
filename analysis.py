@@ -103,7 +103,7 @@ def main():
         "Cobertura% (H|F)",
         "Media GO/sec (H|F)",
         "GOs totales (H|F)",
-        "GOs solapados (total)"
+        "GOs solapados (total)",
         "%"
     ]
     asegurar_cabecera(OUTFILE, cabecera)
@@ -162,7 +162,7 @@ def main():
                 f"{gos_por_prote_h:.3f} | {gos_por_prote_f:.3f}",
                 f"{gos_totales_h} | {gos_totales_f}",
                 total_solapados,
-                f"{(total_solapados/gos_totales_h):.3f} | {(total_solapados/gos_totales_f):.3f}"
+                f"{(total_solapados/gos_totales_h)*100:.3f} | {(total_solapados/gos_totales_f)*100:.3f}"
             ]
             append_fila(OUTFILE, fila)
 
