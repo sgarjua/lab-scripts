@@ -4,13 +4,18 @@
 from pathlib import Path
 import csv, sys
 
+from matplotlib_venn import venn2
+import matplotlib.pyplot as plt
+
+
 # configuración ===============================================================
 TSV = "/data/users/sgarjua/fof_analisis_resultados.tsv"
-OUTFILE = Path("/data/users/sgarjua/comparative_table.tsv")
+OUTFILE = Path("/data/users/sgarjua/comparative_table_final.tsv")
 
 # creamos un diccionario {secuencia: [gos homologia],[gos fantasia]}
 resultados = {}
 
+# diccionarios para guardar resultados de los calculos
 calculos_h = {}
 calculos_f = {}
 
@@ -87,6 +92,61 @@ def append_fila(outfile: Path, row):
         w = csv.writer(tsv, delimiter="\t")
         w.writerow(row)
 
+def calc_total(outfile: Path, fila):
+    with outfile.open(encoding="utf-8") as tsv:
+        for line in tsv:
+            line = line.strip()
+            if line.startswith("Especie"):
+                continue
+            parts = line.split("\t")
+
+            protes = parts[1].split("|")
+            protes_h += protes[0]
+            protes_f += protes[1]
+
+            id_con_go = parts[2].split("|")
+            id_con_go_h += id_con_go[0] / 2
+            id_con_go_f += id_con_go[1] / 2
+
+            id_sin_go = parts[3].split("|")
+            id_sin_go_h += id_sin_go[0] / 2
+            id_sin_go_f += id_sin_go[1] / 2
+
+            cobertura = parts[4].split("|")
+            cobertura_h += cobertura[0] / 2
+            cobertura_f += cobertura[1] / 2
+
+            gos_por_prote = parts[5].split("|")
+            gos_por_prote_h += gos_por_prote[0] / 2
+            gos_por_prote_f += gos_por_prote[1] / 2
+
+            gos_totales = parts[6].split("|")
+            gos_totales_h += gos_totales[0]
+            gos_por_prote_f += gos_totales[1]
+
+            total_solapados += parts[7] / 2
+
+            solape = parts[8].split("|")
+            solape_h += solape[0] / 2
+            solape_f += solape[1] / 2
+
+    return fila
+
+def diagrama_venn():
+    A = 50
+    B = 40
+    AB = 12
+
+    solo_A = A - AB
+    solo_B = B - AB
+
+    venn2(subsets=(solo_A, solo_B, AB), set_labels=("GO-Homología", "GO-Fantasia"))
+    plt.title("Venn de los téminos GO anotados con FANTASIA vs anotación por homología, para la lista de especies analizadas")
+    plt.show()
+
+    fig = plt.gcf()
+    fig.set_size_inches(5, 5)
+    plt.savefig("venn.png", dpi=300, bbox_inches="tight")
 
 # main ========================================================================
 def main():
@@ -104,7 +164,7 @@ def main():
         "Media GO/sec (H|F)",
         "GOs totales (H|F)",
         "GOs solapados (total)",
-        "%"
+        "% (H|F)"
     ]
     asegurar_cabecera(OUTFILE, cabecera)
 
@@ -151,6 +211,8 @@ def main():
 
             # calcular el solape de GO por proteína
             overlaps, total_solapados = calc_overlap_por_prote(resultados)
+            solape_h = (total_solapados/gos_totales_h)*100
+            solape_f = (total_solapados/gos_totales_f)*100
 
             # construir fila
             fila = [
@@ -162,15 +224,13 @@ def main():
                 f"{gos_por_prote_h:.3f} | {gos_por_prote_f:.3f}",
                 f"{gos_totales_h} | {gos_totales_f}",
                 total_solapados,
-                f"{(total_solapados/gos_totales_h)*100:.3f} | {(total_solapados/gos_totales_f)*100:.3f}"
+                f"{solape_h:.3f} | {solape_f:.3f}"
             ]
             append_fila(OUTFILE, fila)
 
-            # Si quieres inspeccionar el solape por proteína, descomenta:
-            # for p, gos in overlaps.items():
-            #     print(f"[{species}] {p} -> {len(gos)} GO solapados: {', '.join(gos)}")
+        calc_total(OUTFILE, fila)        
+        append_fila(OUTFILE, total)
 
-    # print(resultados)  # Ojo: al final contendrá lo de la última especie
 
 if __name__ == "__main__":
     main()
