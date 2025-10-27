@@ -134,25 +134,25 @@ def calc_total(outfile: Path):
             solape_f += float(solape[1])
     
 
-    id_con_go_h += id_con_go_h / n
-    id_con_go_f += id_con_go_f / n
+    id_con_go_h = id_con_go_h / n
+    id_con_go_f = id_con_go_f / n
 
-    id_sin_go_h += id_sin_go_h / n
-    id_sin_go_f += id_sin_go_f / n
+    id_sin_go_h = id_sin_go_h / n
+    id_sin_go_f = id_sin_go_f / n
 
-    cobertura_h += cobertura_h / n
-    cobertura_f += cobertura_f / n
+    cobertura_h = cobertura_h / n
+    cobertura_f = cobertura_f / n
 
-    gos_por_prote_h += gos_por_prote_h / n
-    gos_por_prote_f += gos_por_prote_f / n
+    gos_por_prote_h = gos_por_prote_h / n
+    gos_por_prote_f = gos_por_prote_f / n
 
-    gos_totales_h += gos_totales_h / n
-    gos_por_prote_f += gos_totales_f / n
+    gos_totales_h = gos_totales_h / n
+    gos_por_prote_f = gos_totales_f / n
 
-    total_solapados += total_solapados / n
+    total_solapados = total_solapados / n
 
-    solape_h += solape_h / n
-    solape_f += solape_f / n
+    solape_h = solape_h / n
+    solape_f = solape_f / n
     fila = [
         "MEDIA",
         f"{protes_h} | {protes_f}",
