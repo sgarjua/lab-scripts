@@ -112,35 +112,35 @@ def calc_total(outfile: Path):
                 continue
             parts = line.split("\t")
 
-            protes = int(parts[1].split("|"))
-            protes_h += protes[0]
-            protes_f += protes[1]
+            protes = parts[1].split("|")
+            protes_h += int(protes[0])
+            protes_f += int(protes[1])
 
-            id_con_go = int(parts[2].split("|"))
-            id_con_go_h += id_con_go[0] / 2
-            id_con_go_f += id_con_go[1] / 2
+            id_con_go = parts[2].split("|")
+            id_con_go_h += int(id_con_go[0]) / 2
+            id_con_go_f += int(id_con_go[1]) / 2
 
-            id_sin_go = int(parts[3].split("|"))
-            id_sin_go_h += id_sin_go[0] / 2
-            id_sin_go_f += id_sin_go[1] / 2
+            id_sin_go = parts[3].split("|")
+            id_sin_go_h += int(id_sin_go[0]) / 2
+            id_sin_go_f += int(id_sin_go[1]) / 2
 
-            cobertura = int(parts[4].split("|"))
-            cobertura_h += cobertura[0] / 2
-            cobertura_f += cobertura[1] / 2
+            cobertura = parts[4].split("|")
+            cobertura_h += int(cobertura[0]) / 2
+            cobertura_f += int(cobertura[1]) / 2
 
-            gos_por_prote = int(parts[5].split("|"))
-            gos_por_prote_h += gos_por_prote[0] / 2
-            gos_por_prote_f += gos_por_prote[1] / 2
+            gos_por_prote = parts[5].split("|")
+            gos_por_prote_h += int(gos_por_prote[0]) / 2
+            gos_por_prote_f += int(gos_por_prote[1]) / 2
 
-            gos_totales = int(parts[6].split("|"))
-            gos_totales_h += gos_totales[0]
-            gos_por_prote_f += gos_totales[1]
+            gos_totales = parts[6].split("|")
+            gos_totales_h += int(gos_totales[0])
+            gos_por_prote_f += int(gos_totales[1])
 
             total_solapados += int(parts[7]) / 2
 
-            solape = int(parts[8].split("|"))
-            solape_h += solape[0] / 2
-            solape_f += solape[1] / 2
+            solape = parts[8].split("|")
+            solape_h += int(solape[0]) / 2
+            solape_f += int(solape[1]) / 2
 
     return fila
 
