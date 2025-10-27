@@ -153,7 +153,7 @@ def calc_total(outfile: Path):
 
     solape_h = solape_h / n
     solape_f = solape_f / n
-    
+
     fila = [
         "MEDIA",
         f"{protes_h} | {protes_f}",
@@ -168,9 +168,9 @@ def calc_total(outfile: Path):
     return fila, gos_totales_h, gos_totales_f, total_solapados
 
 def diagrama_venn(gos_totales_h: float, gos_totales_f: float, total_solapados: float):
-    A = gos_totales_h
-    B = gos_totales_f
-    AB = total_solapados
+    A = round(gos_totales_h, 1)
+    B = round(gos_totales_f, 1)
+    AB = round(total_solapados, 1)
 
     solo_A = A - AB
     solo_B = B - AB
