@@ -94,17 +94,7 @@ def append_fila(outfile: Path, row):
 
 def calc_total(outfile: Path):
     protes_h, protes_f, id_con_go_h, id_con_go_f, id_sin_go_h, id_sin_go_f, cobertura_h, cobertura_f, gos_por_prote_h, gos_por_prote_f, gos_totales_h, gos_totales_f, total_solapados, solape_h, solape_f = 0, 0 ,0 ,0 ,0 ,0 ,0, 0, 0, 0, 0, 0, 0, 0, 0
-    fila = [
-            "\nMEDIA",
-            f"{protes_h} | {protes_f}",
-            f"{id_con_go_h} | {id_con_go_f}",
-            f"{id_sin_go_h} | {id_sin_go_f}",
-            f"{cobertura_h:.3f} | {cobertura_f:.3f}",
-            f"{gos_por_prote_h:.3f} | {gos_por_prote_f:.3f}",
-            f"{gos_totales_h} | {gos_totales_f}",
-            total_solapados,
-            f"{solape_h:.3f} | {solape_f:.3f}"
-            ]
+
     with outfile.open(encoding="utf-8") as tsv:
         for line in tsv:
             line = line.strip()
@@ -141,7 +131,17 @@ def calc_total(outfile: Path):
             solape = parts[8].split("|")
             solape_h += float(solape[0]) / 2.0
             solape_f += float(solape[1]) / 2.0
-
+    fila = [
+        "\nMEDIA",
+        f"{protes_h} | {protes_f}",
+        f"{id_con_go_h} | {id_con_go_f}",
+        f"{id_sin_go_h} | {id_sin_go_f}",
+        f"{cobertura_h:.3f} | {cobertura_f:.3f}",
+        f"{gos_por_prote_h:.3f} | {gos_por_prote_f:.3f}",
+        f"{gos_totales_h} | {gos_totales_f}",
+        total_solapados,
+        f"{solape_h:.3f} | {solape_f:.3f}"
+        ]
     return fila
 
 def diagrama_venn():
