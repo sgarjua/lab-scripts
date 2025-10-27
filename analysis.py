@@ -125,8 +125,8 @@ def calc_total(outfile: Path):
             id_sin_go_f += int(id_sin_go[1]) / 2
 
             cobertura = parts[4].split("|")
-            cobertura_h += int(cobertura[0]) / 2
-            cobertura_f += int(cobertura[1]) / 2
+            cobertura_h += cobertura[0] / 2
+            cobertura_f += cobertura[1] / 2
 
             gos_por_prote = parts[5].split("|")
             gos_por_prote_h += int(gos_por_prote[0]) / 2
