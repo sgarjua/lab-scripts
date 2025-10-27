@@ -240,7 +240,7 @@ def main():
             ]
             append_fila(OUTFILE, fila)
 
-        calc_total(OUTFILE)        
+        total = calc_total(OUTFILE)        
         append_fila(OUTFILE, total)
 
 
