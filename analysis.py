@@ -101,7 +101,6 @@ def calc_total(outfile: Path):
             if line.startswith("Especie"):
                 continue
             parts = line.split("\t")
-            print(parts)
 
             protes = parts[1].split(" | ")
             protes_h += int(protes[0])
@@ -133,7 +132,7 @@ def calc_total(outfile: Path):
             solape_h += float(solape[0]) / 2.0
             solape_f += float(solape[1]) / 2.0
     fila = [
-        "\n","MEDIA",
+        "MEDIA",
         f"{protes_h} | {protes_f}",
         f"{id_con_go_h} | {id_con_go_f}",
         f"{id_sin_go_h} | {id_sin_go_f}",
