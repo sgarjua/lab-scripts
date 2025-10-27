@@ -101,35 +101,35 @@ def calc_total(outfile: Path):
             if line.startswith("Especie"):
                 continue
             parts = line.split("\t")
+            print(parts)
 
-            protes = parts[1].split("|")
-            print(protes)
+            protes = parts[1].split("|").strip()
             protes_h += int(protes[0])
             protes_f += int(protes[1])
 
-            id_con_go = parts[2].split("|")
+            id_con_go = parts[2].split("|").strip()
             id_con_go_h += int(id_con_go[0]) / 2
             id_con_go_f += int(id_con_go[1]) / 2
 
-            id_sin_go = parts[3].split("|")
+            id_sin_go = parts[3].split("|").strip()
             id_sin_go_h += int(id_sin_go[0]) / 2
             id_sin_go_f += int(id_sin_go[1]) / 2
 
-            cobertura = parts[4].split("|")
+            cobertura = parts[4].split("|").strip()
             cobertura_h += float(cobertura[0]) / 2.0
             cobertura_f += float(cobertura[1]) / 2.0
 
-            gos_por_prote = parts[5].split("|")
+            gos_por_prote = parts[5].split("|").strip()
             gos_por_prote_h += float(gos_por_prote[0]) / 2.0
             gos_por_prote_f += float(gos_por_prote[1]) / 2.0
 
-            gos_totales = parts[6].split("|")
+            gos_totales = parts[6].split("|").strip()
             gos_totales_h += int(gos_totales[0])
             gos_por_prote_f += int(gos_totales[1])
 
             total_solapados += int(parts[7]) / 2
 
-            solape = parts[8].split("|")
+            solape = parts[8].split("|").strip()
             solape_h += float(solape[0]) / 2.0
             solape_f += float(solape[1]) / 2.0
     fila = [
