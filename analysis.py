@@ -93,6 +93,7 @@ def append_fila(outfile: Path, row):
         w.writerow(row)
 
 def calc_total(outfile: Path):
+    protes_h, protes_f, id_con_go_h, id_con_go_f, cobertura_h, cobertura_f, gos_por_prote_h, gos_por_prote_f, gos_totales_h, gos_totales_f, total_solapados, solape_h, solape_f = 0
     fila = [
             "\nMEDIA",
             f"{protes_h} | {protes_f}",
