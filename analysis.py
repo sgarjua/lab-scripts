@@ -103,6 +103,7 @@ def calc_total(outfile: Path):
             parts = line.split("\t")
 
             protes = parts[1].split("|")
+            print(protes)
             protes_h += int(protes[0])
             protes_f += int(protes[1])
 
