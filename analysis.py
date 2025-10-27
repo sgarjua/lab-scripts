@@ -94,7 +94,7 @@ def append_fila(outfile: Path, row):
 
 def calc_total(outfile: Path):
     fila = [
-            species,
+            "\nMEDIA",
             f"{protes_h} | {protes_f}",
             f"{id_con_go_h} | {id_con_go_f}",
             f"{id_sin_go_h} | {id_sin_go_f}",
