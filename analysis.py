@@ -166,10 +166,10 @@ def calc_total(outfile: Path):
         ]
     return fila
 
-def diagrama_venn():
-    A = 50
-    B = 40
-    AB = 12
+def diagrama_venn(fila: list):
+    A = gos_totales_h
+    B = gos_totales_f
+    AB = total_solapados
 
     solo_A = A - AB
     solo_B = B - AB
@@ -264,6 +264,7 @@ def main():
 
         total = calc_total(OUTFILE)        
         append_fila(OUTFILE, total)
+        venn = diagrama_venn(total)
 
 
 if __name__ == "__main__":
