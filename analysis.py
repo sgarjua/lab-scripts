@@ -125,7 +125,7 @@ def calc_total(outfile: Path):
 
             gos_totales = parts[6].split(" | ")
             gos_totales_h += int(gos_totales[0])
-            gos_por_prote_f += int(gos_totales[1])
+            gos_totales_f += int(gos_totales[1])
 
             total_solapados += int(parts[7])
 
@@ -147,12 +147,13 @@ def calc_total(outfile: Path):
     gos_por_prote_f = gos_por_prote_f / n
 
     gos_totales_h = gos_totales_h / n
-    gos_por_prote_f = gos_totales_f / n
+    gos_totales_f = gos_totales_f / n
 
     total_solapados = total_solapados / n
 
     solape_h = solape_h / n
     solape_f = solape_f / n
+    
     fila = [
         "MEDIA",
         f"{protes_h} | {protes_f}",
