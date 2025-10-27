@@ -125,12 +125,12 @@ def calc_total(outfile: Path):
             id_sin_go_f += int(id_sin_go[1]) / 2
 
             cobertura = parts[4].split("|")
-            cobertura_h += cobertura[0] / 2
-            cobertura_f += cobertura[1] / 2
+            cobertura_h += float(cobertura[0]) / 2.0
+            cobertura_f += float(cobertura[1]) / 2.0
 
             gos_por_prote = parts[5].split("|")
-            gos_por_prote_h += int(gos_por_prote[0]) / 2
-            gos_por_prote_f += int(gos_por_prote[1]) / 2
+            gos_por_prote_h += float(gos_por_prote[0]) / 2.0
+            gos_por_prote_f += float(gos_por_prote[1]) / 2.0
 
             gos_totales = parts[6].split("|")
             gos_totales_h += int(gos_totales[0])
@@ -139,8 +139,8 @@ def calc_total(outfile: Path):
             total_solapados += int(parts[7]) / 2
 
             solape = parts[8].split("|")
-            solape_h += int(solape[0]) / 2
-            solape_f += int(solape[1]) / 2
+            solape_h += float(solape[0]) / 2.0
+            solape_f += float(solape[1]) / 2.0
 
     return fila
 
