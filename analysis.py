@@ -92,7 +92,18 @@ def append_fila(outfile: Path, row):
         w = csv.writer(tsv, delimiter="\t")
         w.writerow(row)
 
-def calc_total(outfile: Path, fila):
+def calc_total(outfile: Path):
+    fila = [
+            species,
+            f"{protes_h} | {protes_f}",
+            f"{id_con_go_h} | {id_con_go_f}",
+            f"{id_sin_go_h} | {id_sin_go_f}",
+            f"{cobertura_h:.3f} | {cobertura_f:.3f}",
+            f"{gos_por_prote_h:.3f} | {gos_por_prote_f:.3f}",
+            f"{gos_totales_h} | {gos_totales_f}",
+            total_solapados,
+            f"{solape_h:.3f} | {solape_f:.3f}"
+            ]
     with outfile.open(encoding="utf-8") as tsv:
         for line in tsv:
             line = line.strip()
@@ -228,7 +239,7 @@ def main():
             ]
             append_fila(OUTFILE, fila)
 
-        calc_total(OUTFILE, fila)        
+        calc_total(OUTFILE)        
         append_fila(OUTFILE, total)
 
 
