@@ -168,12 +168,12 @@ def calc_total(outfile: Path):
     return fila, gos_totales_h, gos_totales_f, total_solapados
 
 def diagrama_venn(gos_totales_h: float, gos_totales_f: float, total_solapados: float):
-    A = round(gos_totales_h, 1)
-    B = round(gos_totales_f, 1)
+    A = gos_totales_h
+    B = gos_totales_f
     AB = round(total_solapados, 1)
 
-    solo_A = A - AB
-    solo_B = B - AB
+    solo_A = round(A - AB, 1)
+    solo_B = round(B - AB, 1)
 
     venn2(subsets=(solo_A, solo_B, AB), set_labels=("GO-Homología", "GO-Fantasia"))
     plt.title("Venn de los téminos GO anotados con FANTASIA vs anotación por homología, para la lista de especies analizadas")
