@@ -156,17 +156,17 @@ def calc_total(outfile: Path):
     fila = [
         "MEDIA",
         f"{protes_h} | {protes_f}",
-        f"{id_con_go_h} | {id_con_go_f}",
-        f"{id_sin_go_h} | {id_sin_go_f}",
-        f"{cobertura_h:.3f} | {cobertura_f:.3f}",
-        f"{gos_por_prote_h:.3f} | {gos_por_prote_f:.3f}",
-        f"{gos_totales_h} | {gos_totales_f}",
-        total_solapados,
-        f"{solape_h:.3f} | {solape_f:.3f}"
+        f"{id_con_go_h:.1f} | {id_con_go_f:.1f}",
+        f"{id_sin_go_h:.1f} | {id_sin_go_f:.1f}",
+        f"{cobertura_h:.1f} | {cobertura_f:.1f}",
+        f"{gos_por_prote_h:.1f} | {gos_por_prote_f:.1f}",
+        f"{gos_totales_h:.1f} | {gos_totales_f:.1f}",
+        f"{total_solapados:.1f}",
+        f"{solape_h:.1f} | {solape_f:.1f}"
         ]
-    return fila
+    return fila, gos_totales_h, gos_totales_f, total_solapados
 
-def diagrama_venn(fila: list):
+def diagrama_venn(gos_totales_h: float, gos_totales_f: float, total_solapados: float):
     A = gos_totales_h
     B = gos_totales_f
     AB = total_solapados
@@ -262,9 +262,9 @@ def main():
             ]
             append_fila(OUTFILE, fila)
 
-        total = calc_total(OUTFILE)        
+        total, gos_totales_h, gos_totales_f, total_solapados = calc_total(OUTFILE)        
         append_fila(OUTFILE, total)
-        venn = diagrama_venn(total)
+        venn = diagrama_venn(gos_totales_h, gos_totales_f, total_solapados)
 
 
 if __name__ == "__main__":
