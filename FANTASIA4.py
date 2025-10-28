@@ -42,7 +42,7 @@ def fasta_cleaner(fasta: Path, clean_fasta: Path):
 
 # ejecutar primer comando
 def run_fantasia(fasta: str, fantasia_run: str):
-    out_path = fantasia_run / outputs
+    out_path = fantasia_run / "outputs"
     print(out_path)
 
     cmd = f"python3 {FANTASIA4} {fasta}"
