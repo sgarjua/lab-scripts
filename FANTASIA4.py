@@ -22,7 +22,11 @@ GENERATE_GPSM = "/data/users/sgarjua/00_software/FANTASIA/generate_gopredsim_inp
 LAUNCH_GPSM = "/data/users/sgarjua/00_software/FANTASIA/launch_gopredsim_pipeline.sh"
 GPU = "CUDA_VISIBLE_DEVICES=1"
 TOPGO = "/data/users/sgarjua/00_software/FANTASIA/convert_topgo_format.py"
+
 FANTASIA4 = "/data/users/sgarjua/00_software/Fantasia.SuperLite.Cluster/fantasia_pipeline.py"
+LOOKUP = "/data/users/sgarjua/00_software/Fantasia.SuperLite.Cluster/data/lookup/lookup_table.npz"
+ANN = "/data/users/sgarjua/00_software/Fantasia.SuperLite.Cluster/data/lookup/annotations.json"
+ACC = "/data/users/sgarjua/00_software/Fantasia.SuperLite.Cluster/data/lookup/accessions.json"
 
 # funciones ===================================================================
 # limpiar el fasta
@@ -45,7 +49,13 @@ def run_fantasia(fasta: str, fantasia_run: str):
     out_path = fantasia_run / "outputs"
     print(out_path)
 
-    cmd = f"python3 {FANTASIA4} {fasta}"
+    cmd = ["python3", FANTASIA4, 
+            fasta,
+            "--device cuda:0",
+            "--lookup-npz", LOOKUP,
+            "--annotations-json", ANN,
+            "--accessions-json", ACC
+            ]
 
     if out_path.exists():
         print(f"[ALREADY DONE] Ya se había ejecutado FANTASIA4 con esta especie")
