@@ -41,7 +41,7 @@ def fasta_cleaner(fasta: Path, clean_fasta: Path):
             print(f"[FAIL] Revisa parámetros/rutas. Detalle: {e}")
 
 # ejecutar primer comando
-def run_fantasia(species: str, clean_fasta: str, prefix: str, fantasia_run: str):
+def run_fantasia(fasta: str, fantasia_run: str):
     out_path = fantasia_run / outputs
     print(out_path)
 
@@ -112,7 +112,7 @@ def main():
             os.chdir(fantasia_run)
 
             # ejecución de FANTASIA
-            firt_step(species, fasta, fantasia_run)
+            run_fantasia(fasta, fantasia_run)
 
             os.chdir(original)
 
