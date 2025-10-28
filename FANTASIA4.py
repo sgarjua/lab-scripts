@@ -51,7 +51,7 @@ def run_fantasia(fasta: str, fantasia_run: str):
 
     cmd = ["python3", FANTASIA4, 
             fasta,
-            "--device cuda:0",
+            "--device", "cuda:0",
             "--lookup-npz", LOOKUP,
             "--annotations-json", ANN,
             "--accessions-json", ACC
