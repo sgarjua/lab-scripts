@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+import argparse
 from pathlib import Path
 import csv, sys
 
@@ -9,8 +10,6 @@ import matplotlib.pyplot as plt
 
 
 # configuración ===============================================================
-TSV = "/data/users/sgarjua/fof_analisis_resultados.tsv"
-OUTFILE = Path("/data/users/sgarjua/comparative_table_final.tsv")
 
 # creamos un diccionario {secuencia: [gos homologia],[gos fantasia]}
 resultados = {}
@@ -20,6 +19,20 @@ calculos_h = {}
 calculos_f = {}
 
 # funciones ===================================================================
+
+def parse_arguments() -> argparse.Namespace:
+    """Return parsed command-line arguments."""
+    description = "Analiza y compara resultados de anotación GO por homología y por FANTASIA."
+    parser = argparse.ArgumentParser(description=description)
+
+    parser.add_argument("-i", "--input",  required=True, help="Input FOF")
+    parser.add_argument("-o", "--output", required=True, help="Output file name")
+
+    if len(sys.argv) == 1:
+        parser.print_help()
+        sys.exit()
+
+    return parser.parse_args()
 
 def calc_stats(file, species: str, destino: int):
     """
@@ -185,7 +198,10 @@ def diagrama_venn(gos_totales_h: float, gos_totales_f: float, total_solapados: f
 
 # main ========================================================================
 def main():
-    tsv_path = Path(TSV)
+
+    arguments = get_arguments()
+    outfile =  arguments["output"]
+    tsv_path = arguments["input"]
     if not tsv_path.exists():
         print(f"[ERROR] No encuentro el TSV: {tsv_path}")
         return
@@ -201,7 +217,7 @@ def main():
         "GOs solapados (total)",
         "% (H|F)"
     ]
-    asegurar_cabecera(OUTFILE, cabecera)
+    asegurar_cabecera(outfile, cabecera)
 
     with tsv_path.open(encoding="utf-8") as f:
         for line in f:
@@ -261,10 +277,10 @@ def main():
                 total_solapados,
                 f"{solape_h:.3f} | {solape_f:.3f}"
             ]
-            append_fila(OUTFILE, fila)
+            append_fila(outfile, fila)
 
-        total, gos_totales_h, gos_totales_f, total_solapados = calc_total(OUTFILE)        
-        append_fila(OUTFILE, total)
+        total, gos_totales_h, gos_totales_f, total_solapados = calc_total(outfile)        
+        append_fila(outfile, total)
         venn = diagrama_venn(gos_totales_h, gos_totales_f, total_solapados)
 
 
