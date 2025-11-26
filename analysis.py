@@ -200,8 +200,8 @@ def diagrama_venn(gos_totales_h: float, gos_totales_f: float, total_solapados: f
 def main():
 
     arguments = parse_arguments()
-    outfile =  arguments["output"]
-    tsv_path = arguments["input"]
+    outfile =  Path(parser.output)
+    tsv_path = Path(parser.input)
     if not tsv_path.exists():
         print(f"[ERROR] No encuentro el TSV: {tsv_path}")
         return
