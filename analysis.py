@@ -199,7 +199,7 @@ def diagrama_venn(gos_totales_h: float, gos_totales_f: float, total_solapados: f
 # main ========================================================================
 def main():
 
-    arguments = get_arguments()
+    arguments = parse_arguments()
     outfile =  arguments["output"]
     tsv_path = arguments["input"]
     if not tsv_path.exists():
